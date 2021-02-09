@@ -1,0 +1,77 @@
+.TodoListItem-virtualized {
+  & + & {
+    border-top: 1px solid #dee2e6;
+  }
+  &:nth-child(even) {
+    background: #f8f9fa;
+  }
+}
+
+.TodoListItem {
+  padding: 1rem;
+  display: flex;
+  align-items: center; // 세로 중앙 정렬
+  &.clicked {
+    background: #e3fafc;
+  }
+  .checkbox {
+    cursor: pointer;
+    flex: 1; // 차지할 수 있는 영역 모두 차지
+    display: flex;
+    align-items: center; // 세로 중앙 정렬
+    svg {
+      // 아이콘
+      font-size: 1.5rem;
+    }
+    .text {
+      margin: 0 0.5rem;
+      flex: 1; // 차지할 수 있는 영역 모두 차지
+    }
+    // 체크되었을 때 보여줄 스타일
+    &.checked {
+      svg {
+        color: #495058;
+      }
+      .text {
+        color: #868e96;
+        opacity: 0.7;
+      }
+    }
+    input {
+      flex: 1;
+      outline: none;
+      padding: 0.35rem 0;
+      margin: 0 0.5rem;
+      border: 0;
+      border-bottom: 1px solid #868f96;
+      background: rgba(0, 0, 0, 0);
+      font-size: 1rem;
+    }
+  }
+  .update {
+    display: flex;
+    align-items: center;
+    margin-right: 0.2rem;
+    font-size: 1.35rem;
+    color: #868f96;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+  .remove {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    color: #ff6b6b;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  // 엘리먼트 사이사이에 테두리를 넣어줌
+  & + & {
+    border-top: 1px solid #dee2e6;
+  }
+}
