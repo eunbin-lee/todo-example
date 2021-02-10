@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import {
   MdCheckBoxOutlineBlank,
   MdCheckBox,
-  MdRemoveCircleOutline,
+  MdDelete,
   MdCreate,
   MdDone,
 } from 'react-icons/md';
@@ -49,7 +49,7 @@ const TodoListItem = ({
           {updating ? <MdDone /> : <MdCreate />}
         </div>
         <div className="remove" onClick={() => onRemove(id)}>
-          <MdRemoveCircleOutline />
+          <MdDelete />
         </div>
       </div>
     </div>
