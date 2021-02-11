@@ -11,7 +11,7 @@ const Login = () => {
         <input
           type="password"
           className="userPw"
-          name="password"
+          name="pw"
           placeholder="PASSWORD"
         />
         <input type="submit" className="loginButton" value="로그인" />
