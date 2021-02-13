@@ -18,13 +18,14 @@ const SignUp = () => {
 
     if (userList.find((user) => user.id === e.target.id.value)) {
       e.preventDefault();
-      alert('이미 존재하는 ID 입니다.');
+      alert('이미 존재하는 아이디입니다.');
       e.target.id.value = '';
       e.target.pw.value = '';
     } else {
       userList.push(account);
       localStorage.setItem(user, JSON.stringify(userList));
       alert('회원가입이 완료되었습니다');
+      window.location.href = '/#/login';
     }
   };
 
@@ -35,7 +36,7 @@ const SignUp = () => {
         <br />
         for TODO APP
       </h1>
-      <form onSubmit={() => onSubmit}>
+      <form onSubmit={onSubmit}>
         <input type="text" className="userId" name="id" placeholder="ID" />
         <input
           type="password"

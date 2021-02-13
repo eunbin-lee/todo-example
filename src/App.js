@@ -4,7 +4,7 @@ import LoginTemplate from './components/LoginTemplate';
 import TodoApp from './components/TodoApp';
 
 const App = () => {
-  window.location.href = '/#/login/signup';
+  window.location.href = '/#/login';
   return (
     <HashRouter>
       <Route path="/login" component={LoginTemplate} />
