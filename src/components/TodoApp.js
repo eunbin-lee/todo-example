@@ -3,10 +3,13 @@ import TodoTemplate from './TodoTemplate';
 import TodoInsert from './TodoInsert';
 import TodoList from './TodoList';
 
+const yourTodo = 'TODO';
+const todoArray = [];
+const todoStorage = JSON.parse(localStorage.getItem(yourTodo));
+
 function createBulkTodos() {
-  const array = [];
-  for (let i = 1; i <= 5; i++) {
-    array.push({
+  for (let i = 1; i <= 3; i++) {
+    todoArray.push({
       id: i,
       text: `할 일 ${i}`,
       checked: false,
@@ -14,7 +17,8 @@ function createBulkTodos() {
       updating: false,
     });
   }
-  return array;
+  localStorage.setItem(yourTodo, JSON.stringify(todoArray));
+  return todoArray;
 }
 
 const TodoApp = () => {
@@ -22,7 +26,7 @@ const TodoApp = () => {
 
   // 고유 값으로 사용 될 id
   // ref 를 사용하여 변수 담기
-  const nextId = useRef(6);
+  const nextId = useRef(4);
 
   const onInsert = useCallback((text) => {
     const todo = {
@@ -32,13 +36,20 @@ const TodoApp = () => {
       clicked: false,
       updating: false,
     };
+    todoArray.push(todo);
+    localStorage.setItem(yourTodo, JSON.stringify(todoArray));
     setTodos((todos) => todos.concat(todo));
     nextId.current += 1; // nextId 1 씩 더하기
   }, []);
 
-  const onRemove = useCallback((id) => {
-    setTodos((todos) => todos.filter((todo) => todo.id !== id));
-  }, []);
+  const onRemove = useCallback(
+    (id) => {
+      const removeTodo = todoArray.filter((todo) => todo.id !== id);
+      setTodos((todos) => todos.filter((todo) => todo.id !== id));
+      localStorage.setItem(yourTodo, JSON.stringify(removeTodo));
+    },
+    [todos],
+  );
 
   const onToggle = useCallback((id) => {
     setTodos((todos) =>
@@ -46,6 +57,7 @@ const TodoApp = () => {
         todo.id === id ? { ...todo, checked: !todo.checked } : todo,
       ),
     );
+    localStorage.setItem(yourTodo, JSON.stringify(...todos));
   }, []);
 
   const colorChange = useCallback((id) => {
@@ -54,12 +66,15 @@ const TodoApp = () => {
         todo.id === id ? { ...todo, clicked: !todo.clicked } : todo,
       ),
     );
+    localStorage.setItem(yourTodo, JSON.stringify(todos));
   }, []);
 
   const onUpdate = useCallback((id) => {
     todos[id - 1].updating = !todos[id - 1].updating;
+    localStorage.setItem(yourTodo, JSON.stringify(todos));
   });
 
+  console.log(todoArray);
   return (
     <TodoTemplate>
       <TodoInsert onInsert={onInsert} />
