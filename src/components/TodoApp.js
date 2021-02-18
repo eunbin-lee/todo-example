@@ -42,14 +42,11 @@ const TodoApp = () => {
     nextId.current += 1; // nextId 1 씩 더하기
   }, []);
 
-  const onRemove = useCallback(
-    (id) => {
-      const removeTodo = todoArray.filter((todo) => todo.id !== id);
-      setTodos((todos) => todos.filter((todo) => todo.id !== id));
-      localStorage.setItem(yourTodo, JSON.stringify(removeTodo));
-    },
-    [todos],
-  );
+  const onRemove = useCallback((id) => {
+    const removeTodo = todoArray.findIndex((todo) => todo.id === id);
+    todoArray.splice(removeTodo, 1);
+    setTodos((todos) => todos.filter((todo) => todo.id !== id));
+  }, []);
 
   const onToggle = useCallback((id) => {
     setTodos((todos) =>
